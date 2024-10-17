@@ -1,5 +1,4 @@
 package com.qst.medical.config.security;
-
 import com.qst.medical.filter.JwtFilter;
 import com.qst.medical.handler.security.CustomizeAuthenticationEntryPoint;
 import com.qst.medical.handler.security.MyAccessDeniedHandler;
@@ -21,6 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
@@ -48,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore((Filter) jwtFilter, (Class<? extends Filter>) UsernamePasswordAuthenticationFilter.class);
         http.formLogin()
                 .loginProcessingUrl("/api/login")
                 .successHandler(authenticationSuccessHandler)
