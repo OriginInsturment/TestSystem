@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(value = "com.qst.medical.mapper")
+@MapperScan("com.qst.medical")
 public class MedicalApplication {
     public static void main(String[] args) {
         SpringApplication.run(MedicalApplication.class, args);
