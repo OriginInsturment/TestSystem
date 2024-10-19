@@ -4,6 +4,8 @@ import com.qst.medical.model.AccountModel;
 import com.qst.medical.service.UserDetailsServiceImpl;
 import com.qst.medical.util.JwtUtils;
 import io.jsonwebtoken.ExpiredJwtException;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,16 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
-
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private static Logger logger = Logger.getLogger(JwtFilter.class.toString());
     @Autowired
     private UserDetailsServiceImpl userDetailService;//自定义的登录逻辑类
+
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String token = httpServletRequest.getHeader("Authorization");
-        httpServletResponse.setContentType("text/json;charset=utf-8");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String token = request.getHeader("Authorization");
+        response.setContentType("text/json;charset=utf-8");
         if (StringUtils.hasLength(token)) {
             String uname = null;
             try {
@@ -47,10 +49,11 @@ public class JwtFilter extends OncePerRequestFilter {
                 AccountModel model = (AccountModel) userDetails;
                 List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(role);
                 UsernamePasswordAuthenticationToken authenticationFilter = new UsernamePasswordAuthenticationToken(model, null, grantedAuthorities);
-                authenticationFilter.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                authenticationFilter.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationFilter);
             }
         }
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+        filterChain.doFilter(request, response);
     }
+
 }

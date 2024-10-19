@@ -23,12 +23,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.Filter;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;//自定义登录业务类
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {    @Autowired    private UserDetailsServiceImpl userDetailsService;//自定义登录业务类
     @Autowired
     private MyAuthenticationFailHandler authenticationFailHandler;//登录失败处理器
     @Autowired
@@ -40,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtFilter jwtFilter;//jwt校验类
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
+    public
+    PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
     @Override
@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore((Filter) jwtFilter, (Class<? extends Filter>) UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore( jwtFilter,  UsernamePasswordAuthenticationFilter.class);
         http.formLogin()
                 .loginProcessingUrl("/api/login")
                 .successHandler(authenticationSuccessHandler)
