@@ -25,6 +25,17 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
     /**
+     * 关键字、分页查询医师列表
+     * @param param
+     * @return
+     */
+    @RolesAllowed({"1","2"})
+    @GetMapping(value = "")
+    public Msg getDoctorWithPage(DoctorParam param) {
+        System.out.println(param.toString());
+        return doctorService.getDoctorWithPage(param);
+    }
+    /**
      * 新增医师信息
      * @param param
      * @return

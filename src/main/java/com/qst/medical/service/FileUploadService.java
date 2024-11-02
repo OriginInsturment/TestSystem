@@ -32,7 +32,7 @@ public class FileUploadService {
         } catch (IOException e) {
             return Msg.fail().mess("上传失败");
         }
-        String url = "http://localhost:8080/image/"+fileName;
+        String url = "https://8u3346057u.zicp.fun/image/"+fileName;
         return Msg.success().mess("上传成功").data("url",url);
 
     }

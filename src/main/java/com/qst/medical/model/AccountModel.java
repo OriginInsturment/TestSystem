@@ -5,20 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 public class AccountModel extends Account implements UserDetails {
     private String urealName; //用户真实姓名
     private Collection<? extends GrantedAuthority> authorities; //认证集
 
-    public AccountModel(Long id, String uname, String realname, String role, String pwd, List<GrantedAuthority> auths) {
-        this.setId(id);
-        this.setUname(uname);
-        this.setRealname(realname);
-        this.setPwd(pwd);
-        this.authorities = authorities;
-
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -27,12 +18,12 @@ public class AccountModel extends Account implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.getPwd();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.getUname();
     }
 
     @Override
@@ -55,11 +46,6 @@ public class AccountModel extends Account implements UserDetails {
         return true;
     }
 
-    public AccountModel(String urealName, Collection<? extends GrantedAuthority> authorities) {
-        this.urealName = urealName;
-        this.authorities = authorities;
-    }
-
     public String getUrealName() {
         return urealName;
     }
@@ -71,4 +57,15 @@ public class AccountModel extends Account implements UserDetails {
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
+
+    public AccountModel(Long id, String urealName, String realname, String role, String pwd, Collection<? extends GrantedAuthority> authorities) {
+        super(id,urealName,role,pwd);
+        setRealname(realname);
+        this.urealName=realname;
+        this.authorities = authorities;
+    }
+
+    public AccountModel() {
+    }
+
 }

@@ -14,6 +14,14 @@ public class Account extends SuperDomain {
     private Date createtime;
     private String realname; //真实姓名
 
+    public Account(Long id, String urealName, String role, String pwd) {
+        this.id=id;
+        this.uname=urealName;
+        this.utype=role;
+        this.pwd=pwd;
+    }
+
+
     @Override
     public String toString() {
         return "Account{" +
@@ -91,4 +99,12 @@ public class Account extends SuperDomain {
     public void setRealname(String realname) {
         this.realname = realname;
     }
+
+    public Account(Long total, Integer pn, Integer size, String keyword) {
+        super(total, pn, size, keyword);
+    }
+
+    public Account() {
+    }
+
 }

@@ -103,7 +103,7 @@ public class DoctorService {
      */
     public Msg updateDoctor(Long id, DoctorParam param) {
         int checkPhone = accountMapper.checkPhone(param.getPhoneNumber());
-        if (checkPhone > 0) {
+        if (checkPhone > 1) {
             return Msg.fail().code(10001).mess("手机号已被使用");
         }
         AccountEntity ae = new AccountEntity();

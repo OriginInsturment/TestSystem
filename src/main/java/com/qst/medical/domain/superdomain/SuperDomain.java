@@ -45,4 +45,14 @@ public class SuperDomain implements Serializable {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
+
+    public SuperDomain(Long total, Integer pn, Integer size, String keyword) {
+        this.total = total;
+        this.pn = pn;
+        this.size = size;
+        this.keyword = keyword;
+    }
+
+    public SuperDomain() {
+    }
 }

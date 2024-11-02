@@ -111,4 +111,5 @@ public class Doctor extends SuperDomain {
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
+
 }

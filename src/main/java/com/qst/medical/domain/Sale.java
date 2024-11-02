@@ -10,10 +10,9 @@ public class Sale extends SuperDomain {
     private String salePhone;//药店电话
     private Date createtime;//创建时间
     private Date updatetime;//修改时间
-
-    //省略get/set方法
-
-
+    private Double lng;
+    private Double lat;
+    private String  address;
     public Long getSaleId() {
         return saleId;
     }
@@ -52,5 +51,29 @@ public class Sale extends SuperDomain {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
